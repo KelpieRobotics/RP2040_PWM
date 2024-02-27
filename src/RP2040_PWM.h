@@ -179,6 +179,32 @@ class RP2040_PWM
              
     _enabled      = false;
   }
+
+  RP2040_PWM(const uint8_t& pin, const float& frequency, const uint32_t& dutycycle, bool phaseCorrect = false)
+  {
+#if defined(F_CPU)
+    freq_CPU = F_CPU;
+#else
+    freq_CPU = 125000000;
+#endif
+
+    _pin          = pin;
+    _frequency    = frequency;
+    _dutycycle    = dutycycle;
+    
+    _phaseCorrect = phaseCorrect;
+     
+    if (!calc_TOP_and_DIV(frequency))
+    {
+      _frequency  = 0;
+    }
+    else
+    {
+      _frequency    = frequency;
+    }
+             
+    _enabled      = false;
+  }
   
   ///////////////////////////////////////////
   
