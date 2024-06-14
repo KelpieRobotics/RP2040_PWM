@@ -36,6 +36,9 @@
 #ifdef PWM_GENERIC_DEBUG_PORT
   #define PWM_DBG_PORT      PWM_GENERIC_DEBUG_PORT
 #else
+  #ifndef Serial
+    #include <Arduino.h>
+  #endif
   #define PWM_DBG_PORT      Serial
 #endif
 
@@ -56,7 +59,7 @@ const char PWM_MARK[] = "[PWM] ";
 const char PWM_SP[]   = " ";
 
 #define PWM_PRINT         PWM_DBG_PORT.print
-#define PWM_PRINTLN       PWM_DBG_PORT.println  
+#define PWM_PRINTLN       PWM_DBG_PORT.println
 
 #define PWM_PRINT_MARK    PWM_PRINT(PWM_MARK)
 #define PWM_PRINT_SP      PWM_PRINT(PWM_SP)
